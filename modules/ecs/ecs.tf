@@ -156,7 +156,7 @@ resource "aws_appautoscaling_target" "ecs_target" {
 
 resource "aws_appautoscaling_scheduled_action" "shutdown" {
   count              = length(aws_ecs_service.main.*.name)
-  name               = "shutdown"
+  name               = "${var.project}-shutdown-${var.env}"
   service_namespace  = aws_appautoscaling_target.ecs_target.*.service_namespace[count.index]
   resource_id        = aws_appautoscaling_target.ecs_target.*.resource_id[count.index]
   scalable_dimension = aws_appautoscaling_target.ecs_target.*.scalable_dimension[count.index]
@@ -170,7 +170,7 @@ resource "aws_appautoscaling_scheduled_action" "shutdown" {
 
 resource "aws_appautoscaling_scheduled_action" "turnon" {
   count              = length(aws_ecs_service.main.*.name)
-  name               = "turnon"
+  name               = "${var.project}-turnon-${var.env}"
   service_namespace  = aws_appautoscaling_target.ecs_target.*.service_namespace[count.index]
   resource_id        = aws_appautoscaling_target.ecs_target.*.resource_id[count.index]
   scalable_dimension = aws_appautoscaling_target.ecs_target.*.scalable_dimension[count.index]
