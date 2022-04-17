@@ -1,12 +1,10 @@
 
 resource "aws_ecs_cluster" "main" {
-  # ECS cluster
   name = "${var.project}-${var.env}"
   tags = var.tags
 }
 
 resource "aws_ecs_task_definition" "main" {
-  # ECS task definition
   count                    = length(var.image_names)
   family                   = format("%s-%s-%s", var.project, var.image_names[count.index], var.env)
   network_mode             = "awsvpc"
@@ -64,6 +62,8 @@ resource "aws_ecs_service" "main" {
   }
 
   lifecycle {
+    # eventbridge will restart task definition to new revision
+    # not initiated by terraform, so have to ignore
     ignore_changes = [task_definition]
   }
 }
