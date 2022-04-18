@@ -48,6 +48,7 @@ resource "aws_ecs_service" "main" {
   deployment_maximum_percent         = 200
   launch_type                        = "FARGATE"
   scheduling_strategy                = "REPLICA"
+  tags                               = var.tags
 
   network_configuration {
     security_groups  = var.security_groups_ecs
