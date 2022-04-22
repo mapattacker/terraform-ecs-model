@@ -7,7 +7,7 @@ variable "s3_model_bucket" {}
 variable "container_ports" {}
 variable "image_urls" {}
 variable "security_groups_ecs" {}
-variable "subnets_public" {}
+variable "subnets" {}
 variable "public_ip" {}
 variable "lb_tg_arns" {}
 variable "cpu" {}
