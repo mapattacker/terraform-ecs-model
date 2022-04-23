@@ -28,14 +28,14 @@ module "s3" {
   tags       = local.tags
 }
 
-module "ecr" {
-  source     = "./modules/ecr"
-  company    = var.company
-  department = var.department
-  project    = var.project
-  models     = var.image_confs.*.endpoint
-  tags       = local.tags
-}
+# module "ecr" {
+#   source     = "./modules/ecr"
+#   company    = var.company
+#   department = var.department
+#   project    = var.project
+#   models     = var.image_confs.*.endpoint
+#   tags       = local.tags
+# }
 
 module "ecs" {
   source          = "./modules/ecs"
@@ -48,7 +48,7 @@ module "ecs" {
   container_ports = var.image_confs.*.port
   cpu             = var.image_confs.*.cpu
   memory          = var.image_confs.*.memory
-  subnets_public  = var.subnets_public
+  subnets         = var.subnets_public
   public_ip       = true
   tags            = local.tags
   # aws cron guide
@@ -63,13 +63,12 @@ module "ecs" {
 
 module "lb" {
   # alb w path-based routing
-  source         = "./modules/lb"
-  project        = var.project
-  company        = var.company
-  env            = var.env
-  vpc_id         = var.vpc_id
-  subnets_public = var.subnets_public
-  # subnets_private = var.subnets_private
+  source             = "./modules/lb"
+  project            = var.project
+  company            = var.company
+  env                = var.env
+  vpc_id             = var.vpc_id
+  subnets            = var.subnets_public
   path_route         = var.image_confs.*.endpoint
   tags               = local.tags
   security_groups_lb = [module.sg.security_group_lb]
