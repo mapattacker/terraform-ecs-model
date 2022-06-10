@@ -14,3 +14,4 @@ variable "cpu" {}
 variable "memory" {}
 variable "shutdown" {}
 variable "turnon" {}
+variable "workers" {}
