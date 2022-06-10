@@ -29,6 +29,15 @@ variable "igw_id" {
   type = string
 }
 
+variable "timeout" {
+  type    = number
+  default = 30
+}
+variable "interval" {
+  type    = number
+  default = 60
+}
+
 
 variable "versioning" {
   type    = string
