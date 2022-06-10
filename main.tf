@@ -48,6 +48,7 @@ module "ecs" {
   container_ports = var.image_confs.*.port
   cpu             = var.image_confs.*.cpu
   memory          = var.image_confs.*.memory
+  workers         = var.image_confs.*.workers
   subnets         = var.subnets_public
   public_ip       = true
   tags            = local.tags
@@ -67,6 +68,8 @@ module "lb" {
   project            = var.project
   company            = var.company
   env                = var.env
+  interval           = var.interval
+  timeout            = var.timeout
   vpc_id             = var.vpc_id
   subnets            = var.subnets_public
   path_route         = var.image_confs.*.endpoint
