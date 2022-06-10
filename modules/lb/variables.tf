@@ -6,3 +6,5 @@ variable "tags" {}
 variable "security_groups_lb" {}
 variable "subnets" {}
 variable "path_route" {}
+variable "timeout" {}
+variable "interval" {}
