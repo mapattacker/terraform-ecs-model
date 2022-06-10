@@ -21,10 +21,10 @@ resource "aws_lb_target_group" "main" {
 
   health_check {
     healthy_threshold   = "3"
-    interval            = "30"
+    interval            = var.interval
     protocol            = "HTTP"
     matcher             = "200"
-    timeout             = "5"
+    timeout             = var.timeout
     path                = format("/%s", var.path_route[count.index])
     unhealthy_threshold = "3"
   }
