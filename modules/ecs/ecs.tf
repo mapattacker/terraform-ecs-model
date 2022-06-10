@@ -24,6 +24,10 @@ resource "aws_ecs_task_definition" "main" {
       containerPort = tonumber(var.container_ports[count.index])
       hostPort      = tonumber(var.container_ports[count.index])
     }]
+    environment = [{
+      name  = "WORKERS"
+      value = var.workers[count.index]
+    }]
     logConfiguration = {
       logDriver = "awslogs"
       options = {
