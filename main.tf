@@ -55,9 +55,8 @@ module "ecs" {
   # aws cron guide
   # https://docs.aws.amazon.com/autoscaling/application/APIReference/API_ScheduledAction.html
   # https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
-  shutdown = "cron(30 12 ? * MON-FRI *)" #8.30am sgt
-  turnon   = "cron(00 10 ? * MON-FRI *)" #6pm sgt
-
+  shutdown            = "cron(00 10 ? * MON-FRI *)" #6pm sgt
+  turnon              = "cron(30 12 ? * MON-FRI *)" #8.30am sgt
   lb_tg_arns          = module.lb.lb_target_group_arns
   security_groups_ecs = [module.sg.security_group_ecs_service]
 }
